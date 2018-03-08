@@ -14,7 +14,9 @@
     "steamquisitor/node_modules"
   ],
   "dependencies": {
-    "express": "^4.14.1"
+    "dotenv": "^5.0.1",
+    "express": "^4.14.1",
+    "request": "^2.83.0"
   },
   "repository": {
     "type": "git",
