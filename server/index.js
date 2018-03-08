@@ -33,13 +33,12 @@ if (cluster.isMaster) {
 
   // TODO: Break APIs into its own module
   // APIs
-  const steamApiKey = `?key=${process.env.STEAM_API_KEY}`;
+  const steamApiKey = process.env.STEAM_API_KEY;
+  const steamTestId = '76561197960435530';
   const steamDomain = 'https://api.steampowered.com/';
   const steamApiGetOwnedGames = 'IPlayerService/GetOwnedGames/v0001/';
-  const steamTestId = '&steamid=76561197960435530';
-
-  const steamTestGetOwnedGames = `${steamDomain}/${steamApiGetOwnedGames}/${steamApiKey}${steamTestId}`;
-
+  const steamGetOwnedGames = `${steamDomain}/${steamApiGetOwnedGames}`;
+  
   // Generic API up/down call
   app.get('/api', function (req, res) {
     res.send('{"message":"API is up"}');
@@ -48,11 +47,12 @@ if (cluster.isMaster) {
   // Proof of concept API call
   app.get('/api/test', function (req, res, next) {
     request({
-      uri: steamTestGetOwnedGames,
-      // qs: {
-      //   api_key: '123456',
-      //   query: 'World of Warcraft: Legion'
-      // }
+      uri: steamGetOwnedGames,
+      qs: {
+        key: steamApiKey,
+        // TODO: Hardcoding test ID here. Should allow it to be passed in
+        steamid: steamTestId
+      }
     }).pipe(res);
   });
 
