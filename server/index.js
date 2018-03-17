@@ -34,24 +34,24 @@ if (cluster.isMaster) {
   // TODO: Break APIs into its own module
   // APIs
   const steamApiKey = process.env.STEAM_API_KEY;
-  const steamTestId = '76561197960435530';
-  const steamDomain = 'https://api.steampowered.com/';
+  const steamDomain = 'https://api.steampowered.com';
   const steamApiGetOwnedGames = 'IPlayerService/GetOwnedGames/v0001/';
   const steamGetOwnedGames = `${steamDomain}/${steamApiGetOwnedGames}`;
-  
+
   // Generic API up/down call
   app.get('/api', function (req, res) {
     res.send('{"message":"API is up"}');
   });
 
   // Proof of concept API call
-  app.get('/api/test', function (req, res, next) {
+  app.get('/api/ownedGames/:steamId', function (req, res, next) {
+    console.log(`Hit: ${steamGetOwnedGames}?steamid=${req.params.steamId}&key=${steamApiKey}`);
+
     request({
       uri: steamGetOwnedGames,
       qs: {
-        key: steamApiKey,
-        // TODO: Hardcoding test ID here. Should allow it to be passed in
-        steamid: steamTestId
+         key: steamApiKey
+        ,steamid: req.params.steamId
       }
     }).pipe(res);
   });
