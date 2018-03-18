@@ -35,23 +35,43 @@ if (cluster.isMaster) {
   // APIs
   const steamApiKey = process.env.STEAM_API_KEY;
   const steamDomain = 'https://api.steampowered.com';
+  const steamApiFormat = 'json';
   const steamApiGetOwnedGames = 'IPlayerService/GetOwnedGames/v0001/';
+  const steamApiGetFriendList = 'ISteamUser/GetFriendList/v0001';
+
   const steamGetOwnedGames = `${steamDomain}/${steamApiGetOwnedGames}`;
+  const steamGetFriendsList = `${steamDomain}/${steamApiGetFriendList}`;
 
   // Generic API up/down call
   app.get('/api', function (req, res) {
     res.send('{"message":"API is up"}');
   });
 
-  // Proof of concept API call
+  // Get owned games for a given Steam User ID
   app.get('/api/ownedGames/:steamId', function (req, res, next) {
     console.log(`Hit: ${steamGetOwnedGames}?steamid=${req.params.steamId}&key=${steamApiKey}`);
 
     request({
       uri: steamGetOwnedGames,
       qs: {
-         key: steamApiKey
-        ,steamid: req.params.steamId
+        key: steamApiKey
+        , steamid: req.params.steamId
+        , format: steamApiFormat
+      }
+    }).pipe(res);
+  });
+
+  // Get friends list for a given Steam User ID
+  app.get('/api/friendsList/:steamId', function (req, res, next) {
+    console.log(`Hit: ${steamGetFriendsList}?steamid=${req.params.steamId}&key=${steamApiKey}`);
+
+    request({
+      uri: steamGetFriendsList,
+      qs: {
+        key: steamApiKey
+        , steamid: req.params.steamId
+        , relationship: 'friend'
+        , format: steamApiFormat
       }
     }).pipe(res);
   });
