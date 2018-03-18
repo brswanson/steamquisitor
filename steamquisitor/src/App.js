@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo_small.png';
+import logo from './magnifying_glass_white.png';
 import './App.css';
 const _ = require('lodash');
 
@@ -83,7 +83,8 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Steamquisitor</h1>
+          <h1 className="App-title">Steamquisitor</h1>
+          <h5><i>A Single Page App for querying Steam APIs. React w/NodeJS.</i></h5>
         </header>
 
         <h3>Game Information</h3>
