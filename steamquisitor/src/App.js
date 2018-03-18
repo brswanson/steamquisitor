@@ -6,14 +6,15 @@ const _ = require('lodash');
 // TODO: Add these to an API class that can be refd
 const ApiOwnedGames = '/api/ownedGames';
 const ApiFriendsList = '/api/friendsList';
+// TODO: Replace this with some other method of setting the default state ID
+const DefaultSteamId = 76561197972291669;
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      // Defaulting to the SteamID of the author of the app
-      id: 76561197972291669,
+      id: DefaultSteamId,
 
       gamesLoaded: false,
       gameCount: 0,
