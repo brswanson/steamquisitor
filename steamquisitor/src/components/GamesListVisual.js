@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import * as d3 from "d3";
-const _ = require('lodash');
 
 class GamesListVisual extends Component {
   // <props>
   // height: 0
   // width: 0
   // games: []
+
   constructor(props) {
     super(props);
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class FriendsList extends Component {
   // <props>
@@ -8,15 +9,13 @@ class FriendsList extends Component {
     return (
       <div>
         <p className="App-intro">Friends List</p>
-        <ul>
+        <ListGroup>
           {this.props.friends.map((item, index) =>
-            <li key={index}>
-              <a href={`http://steamcommunity.com/profiles/` + item.steamid}>{item.steamid}
-                {item.friend_since > 0 ? ` Friend Since: ${this.convertTimestamp(item.friend_since)}` : ''}
-              </a>
-            </li>
+            <ListGroupItem key={index} href={`http://steamcommunity.com/profiles/` + item.steamid}>{item.steamid}
+              {item.friend_since > 0 ? ` Friend Since: ${this.convertTimestamp(item.friend_since)}` : ''}
+            </ListGroupItem>
           )}
-        </ul>
+        </ListGroup>
       </div>
     );
   }
@@ -48,6 +47,6 @@ class FriendsList extends Component {
 
     return time;
   }
-  
+
 }
 export default FriendsList;

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import logo from './magnifying_glass_white.png';
+// import { Form, FormGroup, Col, FormControl, ControlLabel, Button, Well, InputGroup } from 'react-bootstrap';
+import { Form, FormGroup, Col, FormControl, ControlLabel, Button, Well, InputGroup, Glyphicon, MenuItem, DropdownButton } from 'react-bootstrap';
 import './App.css';
 
 import GamesList from './components/GamesList.js'
@@ -115,27 +117,34 @@ class App extends Component {
 
         <h3>Game Information</h3>
 
-        <div>
-          Steam ID:
-          <input
-            type="number"
-            min="11111111111111111"
-            max="99999999999999999"
-            value={this.state.id}
-            onChange={this.changeId}
-            placeholder="Enter a Steam ID"
-          />
-          <button onClick={this.refreshUser}>Refresh</button>
-        </div>
+        <form>
+          <FormGroup>
+            <InputGroup>
+              <InputGroup.Addon>Steam ID</InputGroup.Addon>
+              <FormControl
+                type="number"
+                min="11111111111111111"
+                max="99999999999999999"
+                value={this.state.id}
+                placeholder="Enter a Steam ID"
+                onChange={this.changeId}
+              />
+              <InputGroup.Button>
+                <Button bsStyle="primary" onClick={this.refreshUser}>Refresh</Button>
+              </InputGroup.Button>
+            </InputGroup>
+          </FormGroup>
 
-        {this.state.gamesLoaded && <GamesList gameCount={this.state.gameCount} games={this.state.games} />}
+          <Well>
+            {this.state.gamesLoaded && <GamesList gameCount={this.state.gameCount} games={this.state.games} />}
 
-        <div id="gamesVisual">
-          {this.state.gamesLoaded && <GamesListVisual width={this.state.width} height={this.state.height} games={this.state.games} />}
-        </div>
+            <div id="gamesVisual">
+              {this.state.gamesLoaded && <GamesListVisual width={this.state.width} height={this.state.height} games={this.state.games} />}
+            </div>
 
-        {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
-
+            {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
+          </Well>
+        </form>
       </div>
     );
   }
