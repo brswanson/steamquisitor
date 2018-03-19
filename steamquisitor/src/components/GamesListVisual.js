@@ -28,8 +28,7 @@ class GamesListVisual extends Component {
       clusterPadding = this.state.clusterPadding, // separation between different-color nodes
       maxRadius = this.state.maxRadius;
 
-    var n = this.props.games.length, // total number of nodes
-      m = this.props.games.length; // number of distinct clusters
+    var m = this.props.games.length; // number of distinct clusters
 
     var color = d3.scale.category10()
       .domain(d3.range(m));
@@ -45,7 +44,7 @@ class GamesListVisual extends Component {
           radius: r,
           x: Math.cos(i / m * 2 * Math.PI) * 200 + width / 2 + Math.random(),
           y: Math.sin(i / m * 2 * Math.PI) * 200 + height / 2 + Math.random(),
-          label: item.appid
+          label: item.playtime_forever
         };
       if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
       return d;

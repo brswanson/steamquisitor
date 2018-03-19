@@ -12,7 +12,7 @@ const _ = require('lodash');
 const ApiOwnedGames = '/api/ownedGames';
 const ApiFriendsList = '/api/friendsList';
 // TODO: Replace this with some other method of setting the default state ID
-const DefaultSteamId = 76561197972291669;
+const DefaultSteamId = '76561197972291669';
 
 class App extends Component {
   constructor(props) {
@@ -107,8 +107,6 @@ class App extends Component {
           />
           <button onClick={this.refreshUser}>Refresh</button>
         </div>
-
-
 
         {this.state.gamesLoaded && <GamesList gameCount={this.state.gameCount} games={this.state.games} />}
 
