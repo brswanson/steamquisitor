@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as d3 from "d3";
+const _ = require('lodash');
 
 class GamesListVisual extends Component {
   // <props>
@@ -12,7 +13,8 @@ class GamesListVisual extends Component {
     this.state = {
       padding: 1.5,
       clusterPadding: 6,
-      maxRadius: 20,
+      maxRadius: 100,
+      minRadius: 20,
     };
   }
 
@@ -26,19 +28,22 @@ class GamesListVisual extends Component {
       height = this.props.height,
       padding = this.state.padding, // separation between same-color nodes
       clusterPadding = this.state.clusterPadding, // separation between different-color nodes
-      maxRadius = this.state.maxRadius;
+      maxRadius = this.state.maxRadius,
+      minRadius = this.state.minRadius;
 
     var m = this.props.games.length; // number of distinct clusters
+    // The largest node for each cluster.
+    var clusters = new Array(m);
 
     var color = d3.scale.category10()
       .domain(d3.range(m));
 
-    // The largest node for each cluster.
-    var clusters = new Array(m);
+    // Identify the largest playtime so we can assign radius values by percentile
+    var maxPlaytime = Math.max.apply(Math, this.props.games.map(function(i){return i.playtime_forever;}))
 
     var nodes = this.props.games.map(function (item) {
       var i = Math.floor(Math.random() * m),
-        r = Math.sqrt((i + 1) / m * -Math.log(Math.random())) * maxRadius,
+        r = Math.max((item.playtime_forever / maxPlaytime) * maxRadius, minRadius),
         d = {
           cluster: i,
           radius: r,
