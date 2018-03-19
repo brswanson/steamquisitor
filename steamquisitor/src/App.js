@@ -40,7 +40,8 @@ class App extends Component {
 
   refreshUser() {
     this.displayGames();
-    this.displayFriendList();
+    // TODO: Implement Friends List when other features are finished
+    // this.displayFriendList();
   }
 
   displayGames() {
