@@ -113,7 +113,7 @@ class App extends Component {
         {this.state.gamesLoaded && <GamesList gameCount={this.state.gameCount} games={this.state.games} />}
 
         <div id="gamesVisual">
-          {this.state.gamesLoaded && <GamesListVisual width={960} height={500} />}
+          {this.state.gamesLoaded && <GamesListVisual width={960} height={500} games={this.state.games} />}
         </div>
 
         {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}

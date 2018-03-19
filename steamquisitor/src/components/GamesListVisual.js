@@ -5,6 +5,16 @@ class GamesListVisual extends Component {
   // <props>
   // height: 0
   // width: 0
+  // games: []
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      padding: 1.5,
+      clusterPadding: 6,
+      maxRadius: 20,
+    };
+  }
 
   componentDidMount() {
     this.renderVisual(this.element);
@@ -14,12 +24,12 @@ class GamesListVisual extends Component {
     // NOTE: Much of this rendering code is hacked together using examples online
     var width = this.props.width,
       height = this.props.height,
-      padding = 1.5, // separation between same-color nodes
-      clusterPadding = 6, // separation between different-color nodes
-      maxRadius = 12;
+      padding = this.state.padding, // separation between same-color nodes
+      clusterPadding = this.state.clusterPadding, // separation between different-color nodes
+      maxRadius = this.state.maxRadius;
 
-    var n = 20, // total number of nodes
-        m = 10; // number of distinct clusters
+    var n = this.props.games.length, // total number of nodes
+      m = this.props.games.length; // number of distinct clusters
 
     var color = d3.scale.category10()
       .domain(d3.range(m));
@@ -27,7 +37,7 @@ class GamesListVisual extends Component {
     // The largest node for each cluster.
     var clusters = new Array(m);
 
-    var nodes = d3.range(n).map(function () {
+    var nodes = this.props.games.map(function (item) {
       var i = Math.floor(Math.random() * m),
         r = Math.sqrt((i + 1) / m * -Math.log(Math.random())) * maxRadius,
         d = {
@@ -35,7 +45,7 @@ class GamesListVisual extends Component {
           radius: r,
           x: Math.cos(i / m * 2 * Math.PI) * 200 + width / 2 + Math.random(),
           y: Math.sin(i / m * 2 * Math.PI) * 200 + height / 2 + Math.random(),
-          label: "TEST 123"
+          label: item.appid
         };
       if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
       return d;
@@ -58,15 +68,15 @@ class GamesListVisual extends Component {
 
     var node = elem.enter().append("g");
 
-    var text = node
-      .append("text")
-      .text(function (d) { return d.label; })
-      .attr("stroke", "black");
-
     var circle = node.append("circle")
       .attr("stroke", "black")
       .attr('stroke-width', 0)
       .style("fill", function (d) { return color(d.cluster); })
+
+    var text = node
+      .append("text")
+      .text(function (d) { return d.label; })
+      .attr("stroke", "black");
 
     node.call(force.drag);
 
@@ -167,5 +177,4 @@ class GamesListVisual extends Component {
   }
 
 }
-
 export default GamesListVisual;
