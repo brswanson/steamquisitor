@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from './magnifying_glass_white.png';
-// import { Form, FormGroup, Col, FormControl, ControlLabel, Button, Well, InputGroup } from 'react-bootstrap';
-import { Form, FormGroup, Col, FormControl, ControlLabel, Button, Well, InputGroup, Glyphicon, MenuItem, DropdownButton } from 'react-bootstrap';
+import { Button, Form, FormControl, Glyphicon, InputGroup, Well } from 'react-bootstrap';
 import './App.css';
 
 import GamesList from './components/GamesList.js'
@@ -38,6 +37,7 @@ class App extends Component {
     this.refreshUser = this.refreshUser.bind(this);
     this.changeId = this.changeId.bind(this);
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -59,7 +59,16 @@ class App extends Component {
     }
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+
+    if (event.charCode === 13) {
+      this.refreshUser();
+    }
+  }
+
   refreshUser() {
+    console.log('refreshUser');
     this.displayGames();
     // TODO: Implement Friends List when other features are finished
     // this.displayFriendList();
@@ -117,8 +126,8 @@ class App extends Component {
 
         <h3>Game Information</h3>
 
-        <form>
-          <FormGroup>
+        <div className="form">
+          <Form onSubmit={this.handleSubmit}>
             <InputGroup>
               <InputGroup.Addon>Steam ID</InputGroup.Addon>
               <FormControl
@@ -130,21 +139,21 @@ class App extends Component {
                 onChange={this.changeId}
               />
               <InputGroup.Button>
-                <Button bsStyle="primary" onClick={this.refreshUser}>Refresh</Button>
+                <Button type="submit" bsStyle="primary" onClick={this.refreshUser}><Glyphicon glyph="search" /></Button>
               </InputGroup.Button>
             </InputGroup>
-          </FormGroup>
+          </Form>
+        </div>
 
-          <Well>
-            {this.state.gamesLoaded && <GamesList gameCount={this.state.gameCount} games={this.state.games} />}
+        <Well>
+          {this.state.gamesLoaded && <GamesList gameCount={this.state.gameCount} games={this.state.games} />}
 
-            <div id="gamesVisual">
-              {this.state.gamesLoaded && <GamesListVisual width={this.state.width} height={this.state.height} games={this.state.games} />}
-            </div>
+          <div id="gamesVisual">
+            {this.state.gamesLoaded && <GamesListVisual width={this.state.width} height={this.state.height} games={this.state.games} />}
+          </div>
 
-            {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
-          </Well>
-        </form>
+          {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
+        </Well>
       </div>
     );
   }
