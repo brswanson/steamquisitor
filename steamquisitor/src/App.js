@@ -27,15 +27,34 @@ class App extends Component {
 
       friendsLoaded: false,
       friends: [],
+
+      width: 800,
+      height: 600
     };
 
     // Add 'this' during callback
     this.refreshUser = this.refreshUser.bind(this);
     this.changeId = this.changeId.bind(this);
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
   componentDidMount() {
     this.refreshUser();
+    window.addEventListener("resize", this.updateWindowDimensions.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateWindowDimensions.bind(this));
+  }
+
+  updateWindowDimensions() {
+    if (window.innerWidth < this.state.width) {
+      this.setState({ width: window.innerWidth });
+    } else {
+      let update_width = window.innerWidth - 100;
+      let update_height = Math.round(update_width / 4.4);
+      this.setState({ width: update_width, height: update_height });
+    }
   }
 
   refreshUser() {
@@ -112,7 +131,7 @@ class App extends Component {
         {this.state.gamesLoaded && <GamesList gameCount={this.state.gameCount} games={this.state.games} />}
 
         <div id="gamesVisual">
-          {this.state.gamesLoaded && <GamesListVisual width={960} height={500} games={this.state.games} />}
+          {this.state.gamesLoaded && <GamesListVisual width={this.state.width} height={this.state.height} games={this.state.games} />}
         </div>
 
         {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
