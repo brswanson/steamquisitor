@@ -48,6 +48,6 @@ class FriendsList extends Component {
 
     return time;
   }
+  
 }
-
 export default FriendsList;

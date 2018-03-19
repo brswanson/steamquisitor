@@ -21,6 +21,6 @@ class GamesList extends Component {
       </div>
     );
   }
+  
 }
-
 export default GamesList;
