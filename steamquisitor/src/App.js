@@ -3,6 +3,7 @@ import logo from './magnifying_glass_white.png';
 import './App.css';
 
 import GamesList from './components/GamesList.js'
+import GamesListVisual from './components/GamesListVisual.js'
 import FriendsList from './components/FriendsList.js'
 
 const _ = require('lodash');
@@ -107,7 +108,13 @@ class App extends Component {
           <button onClick={this.refreshUser}>Refresh</button>
         </div>
 
+
+
         {this.state.gamesLoaded && <GamesList gameCount={this.state.gameCount} games={this.state.games} />}
+
+        <div id="gamesVisual">
+          {this.state.gamesLoaded && <GamesListVisual width={960} height={500} />}
+        </div>
 
         {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
 
