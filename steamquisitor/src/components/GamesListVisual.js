@@ -31,24 +31,24 @@ class GamesListVisual extends Component {
       maxRadius = this.state.maxRadius,
       minRadius = this.state.minRadius;
 
-    var m = this.props.games.length; // number of distinct clusters
+    var itemCount = this.props.games.length; // number of distinct clusters
     // The largest node for each cluster.
-    var clusters = new Array(m);
+    var clusters = new Array(itemCount);
 
     var color = d3.scale.category10()
-      .domain(d3.range(m));
+      .domain(d3.range(this.props.games.length));
 
     // Identify the largest playtime so we can assign radius values by percentile
     var maxPlaytime = Math.max.apply(Math, this.props.games.map(function(i){return i.playtime_forever;}))
 
     var nodes = this.props.games.map(function (item) {
-      var i = Math.floor(Math.random() * m),
+      var i = Math.floor(Math.random() * itemCount),
         r = Math.max((item.playtime_forever / maxPlaytime) * maxRadius, minRadius),
         d = {
           cluster: i,
           radius: r,
-          x: Math.cos(i / m * 2 * Math.PI) * 200 + width / 2 + Math.random(),
-          y: Math.sin(i / m * 2 * Math.PI) * 200 + height / 2 + Math.random(),
+          x: Math.cos(i / itemCount * 2 * Math.PI) * 200 + width / 2 + Math.random(),
+          y: Math.sin(i / itemCount * 2 * Math.PI) * 200 + height / 2 + Math.random(),
           label: item.playtime_forever
         };
       if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
