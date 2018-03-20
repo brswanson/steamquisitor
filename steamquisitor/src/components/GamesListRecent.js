@@ -17,7 +17,7 @@ class GamesListRecent extends Component {
           <ListGroup>
             {this.props.games.map((item, index) =>
               <ListGroupItem header={<Image src={`http://media.steampowered.com/steamcommunity/public/images/apps/${item.appid}/${item.img_logo_url}.jpg`} circle />} key={index} href={`https://store.steampowered.com/app/${item.appid}`}>
-                <b>{item.name}</b> {item.playtime_2weeks} minutes
+                <b>{item.name}</b> {item.playtime_2weeks} minute(s)
               </ListGroupItem>
             )}
           </ListGroup>
