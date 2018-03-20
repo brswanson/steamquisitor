@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './magnifying_glass_white.png';
-import { Button, Form, FormControl, Glyphicon, InputGroup, Well } from 'react-bootstrap';
+import { Button, Col, Form, FormControl, Glyphicon, InputGroup, Row, Well } from 'react-bootstrap';
 import { RingLoader } from 'react-spinners';
 import './App.css';
 
@@ -72,8 +72,7 @@ class App extends Component {
 
   refreshUser() {
     this.displayGames();
-    // TODO: Implement Friends List when other features are finished
-    // this.displayFriendList();
+    this.displayFriendList();
   }
 
   displayGames() {
@@ -121,7 +120,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <a style={{float: 'right'}} href="https://github.com/brswanson">github.com/brswanson</a>
+        <a style={{ float: 'right' }} href="https://github.com/brswanson">github.com/brswanson</a>
 
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -165,8 +164,14 @@ class App extends Component {
           </div>
         </Well>
 
-        {this.state.gamesLoaded && <GamesListRecent gameCount={this.state.gameCount} games={this.state.games} />}
-        {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
+        <Row className="show-grid">
+          <Col md={6}>
+          {this.state.gamesLoaded && <GamesListRecent gameCount={this.state.gameCount} games={this.state.games} />}
+          </Col>
+          <Col md={6}>
+          {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
+          </Col>
+        </Row>
       </div>
     );
   }

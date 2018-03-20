@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button, Glyphicon, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class FriendsList extends Component {
   // <props>
@@ -15,8 +15,9 @@ class FriendsList extends Component {
         {this.props.friends.length > 0 &&
           <ListGroup>
             {this.props.friends.map((item, index) =>
-              <ListGroupItem key={index} href={`http://steamcommunity.com/profiles/` + item.steamid}>{item.steamid}
-                {item.friend_since > 0 ? ` Friend Since: ${this.convertTimestamp(item.friend_since)}` : ''}
+              <ListGroupItem key={index} href={`http://steamcommunity.com/profiles/` + item.steamid}>
+                <p><b>{item.steamid}</b>:
+                {item.friend_since > 0 ? ` Since ${this.convertTimestamp(item.friend_since)}` : ''}</p>
               </ListGroupItem>
             )}
           </ListGroup>

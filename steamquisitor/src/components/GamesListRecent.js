@@ -6,6 +6,8 @@ class GamesListRecent extends Component {
   // gameCount: 0
   // games: []
 
+  // TODO: Utilize icon URLs on mobile devices and logos on desktop. Right now desktop is always used.
+
   render() {
     return (
       <div>

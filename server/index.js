@@ -51,7 +51,7 @@ if (cluster.isMaster) {
 
   // Get owned games for a given Steam User ID
   app.get('/api/ownedGames/:steamId', function (req, res, next) {
-    console.log(`Hit: ${steamGetOwnedGames}?steamid=${req.params.steamId}&key=${steamApiKey}`);
+    console.log(`${steamGetOwnedGames}?steamid=${req.params.steamId}&key=${steamApiKey}`);
 
     request({
       uri: steamGetOwnedGames,
@@ -65,7 +65,7 @@ if (cluster.isMaster) {
 
   // Get recently played games for a given Steam User ID
   app.get('/api/recentlyPlayedGames/:steamId', function (req, res, next) {
-    console.log(`Hit: ${steamGetRecentlyPlayedGames}?steamid=${req.params.steamId}&key=${steamApiKey}&count=10`);
+    console.log(`${steamGetRecentlyPlayedGames}?steamid=${req.params.steamId}&key=${steamApiKey}&count=10`);
 
     request({
       uri: steamGetRecentlyPlayedGames,
@@ -81,7 +81,7 @@ if (cluster.isMaster) {
 
   // Get friends list for a given Steam User ID
   app.get('/api/friendsList/:steamId', function (req, res, next) {
-    console.log(`Hit: ${steamGetFriendsList}?steamid=${req.params.steamId}&key=${steamApiKey}`);
+    console.log(`${steamGetFriendsList}?steamid=${req.params.steamId}&key=${steamApiKey}`);
 
     request({
       uri: steamGetFriendsList,
