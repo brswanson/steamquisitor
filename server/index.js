@@ -65,13 +65,14 @@ if (cluster.isMaster) {
 
   // Get recently played games for a given Steam User ID
   app.get('/api/recentlyPlayedGames/:steamId', function (req, res, next) {
-    console.log(`Hit: ${steamGetRecentlyPlayedGames}?steamid=${req.params.steamId}&key=${steamApiKey}`);
+    console.log(`Hit: ${steamGetRecentlyPlayedGames}?steamid=${req.params.steamId}&key=${steamApiKey}&count=10`);
 
     request({
       uri: steamGetRecentlyPlayedGames,
       qs: {
         key: steamApiKey
         , steamid: req.params.steamId
+        , count: 10
         , format: steamApiFormat
       }
     }).pipe(res);
