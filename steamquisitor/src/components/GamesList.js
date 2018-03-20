@@ -9,14 +9,19 @@ class GamesList extends Component {
   render() {
     return (
       <div>
-        <p className="App-intro">Game Count: {this.props.gameCount}</p>
-        <ListGroup>
-          {this.props.games.map((item, index) =>
-            <ListGroupItem key={index} href={'http://store.steampowered.com/app/' + item.appid}>{item.appid} Playtime: {item.playtime_forever} minutes
+        {this.props.games.length > 0 &&
+          <p className="App-intro">Top {Math.min(this.props.gameCount, 10)}/{this.props.gameCount} Games Owned by Playtime</p>
+        }
+
+        {this.props.games.length > 0 &&
+          <ListGroup>
+            {this.props.games.map((item, index) =>
+              <ListGroupItem key={index} href={'https://store.steampowered.com/app/' + item.appid}>{item.appid} Playtime: {item.playtime_forever} minutes
             {item.playtime_2weeks ? `, Last 2 Weeks: ${item.playtime_2weeks}` : ''}
-            </ListGroupItem>
-          )}
-        </ListGroup>
+              </ListGroupItem>
+            )}
+          </ListGroup>
+        }
       </div>
     );
   }

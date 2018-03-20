@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './magnifying_glass_white.png';
 import { Button, Form, FormControl, Glyphicon, InputGroup, Well } from 'react-bootstrap';
+import { RingLoader } from 'react-spinners';
 import './App.css';
 
 import GamesList from './components/GamesList.js'
@@ -29,8 +30,8 @@ class App extends Component {
       friendsLoaded: false,
       friends: [],
 
-      width: 800,
-      height: 600
+      width: window.innerWidth,
+      height: Math.max(window.innerWidth / 5, 300)
     };
 
     // Add 'this' during callback
@@ -68,14 +69,13 @@ class App extends Component {
   }
 
   refreshUser() {
-    console.log('refreshUser');
     this.displayGames();
     // TODO: Implement Friends List when other features are finished
     // this.displayFriendList();
   }
 
   displayGames() {
-    this.setState({ gamesLoading: true });
+    this.setState({ gamesLoaded: false });
 
     this.apiCall(ApiOwnedGames)
       .then(res => this.setState({
@@ -90,7 +90,7 @@ class App extends Component {
   }
 
   displayFriendList() {
-    this.setState({ friendsLoading: true });
+    this.setState({ friendsLoaded: false });
 
     this.apiCall(ApiFriendsList)
       .then(res => this.setState({
@@ -146,14 +146,21 @@ class App extends Component {
         </div>
 
         <Well>
-          {this.state.gamesLoaded && <GamesList gameCount={this.state.gameCount} games={this.state.games} />}
-
           <div id="gamesVisual">
-            {this.state.gamesLoaded && <GamesListVisual width={this.state.width} height={this.state.height} games={this.state.games} />}
-          </div>
+            <div className="col-md-offset-6">
+              <RingLoader color={'#337ab7'} loading={!this.state.gamesLoaded} />
+            </div>
 
-          {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
+            {this.state.gamesLoaded && <GamesListVisual
+              games={this.state.games}
+              width={this.state.width * .9}
+              height={this.state.height * .9}
+            />}
+          </div>
         </Well>
+
+        {this.state.gamesLoaded && <GamesList gameCount={this.state.gameCount} games={this.state.games} />}
+        {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
       </div>
     );
   }

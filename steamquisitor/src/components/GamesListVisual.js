@@ -13,8 +13,8 @@ class GamesListVisual extends Component {
     this.state = {
       padding: 1.5,
       clusterPadding: 6,
-      maxRadius: 100,
-      minRadius: 20,
+      maxRadius: (props.maxRadius || 100),
+      minRadius: (props.minRadius || 20),
     };
   }
 
@@ -39,7 +39,7 @@ class GamesListVisual extends Component {
       .domain(d3.range(this.props.games.length));
 
     // Identify the largest playtime so we can assign radius values by percentile
-    var maxPlaytime = Math.max.apply(Math, this.props.games.map(function(i){return i.playtime_forever;}))
+    var maxPlaytime = Math.max.apply(Math, this.props.games.map(function (i) { return i.playtime_forever; }))
 
     var nodes = this.props.games.map(function (item) {
       var i = Math.floor(Math.random() * itemCount),
@@ -176,7 +176,11 @@ class GamesListVisual extends Component {
 
   render() {
     return (
-      <div ref={element => this.element = element}> </div>
+      <div>
+        {this.props.games.length > 0
+          ? <div ref={element => this.element = element} />
+          : <p>No games found</p>}
+      </div>
     );
   }
 

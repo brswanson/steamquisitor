@@ -8,14 +8,19 @@ class FriendsList extends Component {
   render() {
     return (
       <div>
-        <p className="App-intro">Friends List</p>
-        <ListGroup>
-          {this.props.friends.map((item, index) =>
-            <ListGroupItem key={index} href={`http://steamcommunity.com/profiles/` + item.steamid}>{item.steamid}
-              {item.friend_since > 0 ? ` Friend Since: ${this.convertTimestamp(item.friend_since)}` : ''}
-            </ListGroupItem>
-          )}
-        </ListGroup>
+        {this.props.friends.length > 0 &&
+          <p className="App-intro">Friends List</p>
+        }
+
+        {this.props.friends.length > 0 &&
+          <ListGroup>
+            {this.props.friends.map((item, index) =>
+              <ListGroupItem key={index} href={`http://steamcommunity.com/profiles/` + item.steamid}>{item.steamid}
+                {item.friend_since > 0 ? ` Friend Since: ${this.convertTimestamp(item.friend_since)}` : ''}
+              </ListGroupItem>
+            )}
+          </ListGroup>
+        }
       </div>
     );
   }
