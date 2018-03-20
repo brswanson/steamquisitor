@@ -126,10 +126,8 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Steamquisitor</h1>
-          <h5><i>A Single Page App for querying Steam APIs. React w/NodeJS.</i></h5>
         </header>
-
-        <h3>Game Information</h3>
+        <h6><i>A Single Page App for querying Steam APIs. React w/NodeJS.</i></h6>
 
         <div className="form">
           <Form onSubmit={this.handleSubmit}>
