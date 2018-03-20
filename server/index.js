@@ -37,9 +37,11 @@ if (cluster.isMaster) {
   const steamDomain = 'https://api.steampowered.com';
   const steamApiFormat = 'json';
   const steamApiGetOwnedGames = 'IPlayerService/GetOwnedGames/v0001/';
+  const steamApiGetRecentlyPlayedGames = 'IPlayerService/GetRecentlyPlayedGames/v0001/';
   const steamApiGetFriendList = 'ISteamUser/GetFriendList/v0001';
 
   const steamGetOwnedGames = `${steamDomain}/${steamApiGetOwnedGames}`;
+  const steamGetRecentlyPlayedGames = `${steamDomain}/${steamApiGetRecentlyPlayedGames}`;
   const steamGetFriendsList = `${steamDomain}/${steamApiGetFriendList}`;
 
   // Generic API up/down call
@@ -60,6 +62,21 @@ if (cluster.isMaster) {
       }
     }).pipe(res);
   });
+
+  // Get recently played games for a given Steam User ID
+  app.get('/api/recentlyPlayedGames/:steamId', function (req, res, next) {
+    console.log(`Hit: ${steamGetRecentlyPlayedGames}?steamid=${req.params.steamId}&key=${steamApiKey}`);
+
+    request({
+      uri: steamGetRecentlyPlayedGames,
+      qs: {
+        key: steamApiKey
+        , steamid: req.params.steamId
+        , format: steamApiFormat
+      }
+    }).pipe(res);
+  });
+
 
   // Get friends list for a given Steam User ID
   app.get('/api/friendsList/:steamId', function (req, res, next) {

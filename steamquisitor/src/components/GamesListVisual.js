@@ -39,17 +39,17 @@ class GamesListVisual extends Component {
       .domain(d3.range(this.props.games.length));
 
     // Identify the largest playtime so we can assign radius values by percentile
-    var maxPlaytime = Math.max.apply(Math, this.props.games.map(function (i) { return i.playtime_forever; }))
+    var maxPlaytime = Math.max.apply(Math, this.props.games.map(function (i) { return i.playtime_2weeks; }))
 
     var nodes = this.props.games.map(function (item) {
       var i = Math.floor(Math.random() * itemCount),
-        r = Math.max((item.playtime_forever / maxPlaytime) * maxRadius, minRadius),
+        r = Math.max((item.playtime_2weeks / maxPlaytime) * maxRadius, minRadius),
         d = {
           cluster: i,
           radius: r,
           x: Math.cos(i / itemCount * 2 * Math.PI) * 200 + width / 2 + Math.random(),
           y: Math.sin(i / itemCount * 2 * Math.PI) * 200 + height / 2 + Math.random(),
-          label: item.playtime_forever
+          label: item.name
         };
       if (!clusters[i] || (r > clusters[i].radius)) clusters[i] = d;
       return d;

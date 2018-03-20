@@ -4,7 +4,8 @@ import { Button, Form, FormControl, Glyphicon, InputGroup, Well } from 'react-bo
 import { RingLoader } from 'react-spinners';
 import './App.css';
 
-import GamesList from './components/GamesList.js'
+// import GamesList from './components/GamesList.js'
+import GamesListRecent from './components/GamesListRecent.js'
 import GamesListVisual from './components/GamesListVisual.js'
 import FriendsList from './components/FriendsList.js'
 
@@ -12,6 +13,7 @@ const _ = require('lodash');
 
 // TODO: Add these to an API class that can be refd
 const ApiOwnedGames = '/api/ownedGames';
+const ApiRecentlyPlayedGames = '/api/recentlyPlayedGames';
 const ApiFriendsList = '/api/friendsList';
 // TODO: Replace this with some other method of setting the default state ID
 const DefaultSteamId = '76561197972291669';
@@ -77,13 +79,13 @@ class App extends Component {
   displayGames() {
     this.setState({ gamesLoaded: false });
 
-    this.apiCall(ApiOwnedGames)
+    this.apiCall(ApiRecentlyPlayedGames)
       .then(res => this.setState({
         response: res.response,
         gameCount: res.response.game_count,
         // Sort games desc by play time, then asc id
         // Only takes the first 10 elements
-        games: _.take(_.orderBy(res.response.games, ['playtime_forever', 'appid'], ['desc', 'asc']), 10),
+        games: _.take(_.orderBy(res.response.games, ['playtime_2weeks', 'appid'], ['desc', 'asc']), 10),
         gamesLoaded: true,
       }))
       .catch(err => console.log(err));
@@ -145,10 +147,13 @@ class App extends Component {
           </Form>
         </div>
 
-        <Well>
+        <Well bsSize="small">
           <div id="gamesVisual">
-            <div className="col-md-offset-6">
-              <RingLoader color={'#337ab7'} loading={!this.state.gamesLoaded} />
+
+            <div className="row">
+              <div className="col-md-offset-6">
+                <RingLoader color={'#337ab7'} loading={!this.state.gamesLoaded} />
+              </div>
             </div>
 
             {this.state.gamesLoaded && <GamesListVisual
@@ -159,7 +164,7 @@ class App extends Component {
           </div>
         </Well>
 
-        {this.state.gamesLoaded && <GamesList gameCount={this.state.gameCount} games={this.state.games} />}
+        {this.state.gamesLoaded && <GamesListRecent gameCount={this.state.gameCount} games={this.state.games} />}
         {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
       </div>
     );
