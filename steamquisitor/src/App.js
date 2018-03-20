@@ -120,6 +120,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
+        <a style={{float: 'right'}} href="https://github.com/brswanson">github.com/brswanson</a>
+
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Steamquisitor</h1>
