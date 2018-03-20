@@ -123,7 +123,7 @@ class GamesListVisual extends Component {
       text
         .each(cluster(10 * e.alpha * e.alpha))
         .each(collide(.5))
-        .attr("transform", function (d) { return "translate(" + [d.x, d.y] + ")"; })
+        .attr("transform", function (d) { return "translate(" + [d.x - (d.radius * .75), d.y] + ")"; })
     }
 
     // Move d to be adjacent to the cluster circle.
