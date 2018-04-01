@@ -172,7 +172,7 @@ class App extends Component {
                       </div>
 
                       {this.state.gamesLoaded && <GamesListVisualBarGraph
-                        games={this.state.games}
+                        data={this.state.games}
                         width={this.state.width * .9}
                         height={this.state.height * .9} />}
                     </div>
@@ -186,7 +186,7 @@ class App extends Component {
                       </div>
 
                       {this.state.gamesLoaded && <GamesListVisualBubbles
-                        games={this.state.games}
+                        data={this.state.games}
                         width={this.state.width * .9}
                         height={this.state.height * .9} />}
                     </div>

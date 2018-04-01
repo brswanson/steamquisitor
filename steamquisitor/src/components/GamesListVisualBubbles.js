@@ -5,7 +5,7 @@ class GamesListVisualBubbles extends Component {
   // <props>
   // height: 0
   // width: 0
-  // games: []
+  // data: []
 
   constructor(props) {
     super(props);
@@ -31,16 +31,16 @@ class GamesListVisualBubbles extends Component {
       minRadius = this.state.minRadius;
 
     // NOTE: Much of this rendering code is hacked together using examples online.
-    var itemCount = this.props.games.length; // number of distinct clusters
+    var itemCount = this.props.data.length; // number of distinct clusters
     // The largest node for each cluster.
     var clusters = new Array(itemCount);
-    var color = d3.scale.category10().domain(d3.range(this.props.games.length));
+    var color = d3.scale.category10().domain(d3.range(this.props.data.length));
 
     // Identify the largest playtime so we can assign radius values by percentile
-    var maxPlaytime = Math.max.apply(Math, this.props.games.map(function (i) { return i.playtime_2weeks; }))
+    var maxPlaytime = Math.max.apply(Math, this.props.data.map(function (i) { return i.playtime_2weeks; }))
 
     var i = 0;
-    var nodes = this.props.games.map(function (item) {
+    var nodes = this.props.data.map(function (item) {
       var r = Math.max((item.playtime_2weeks / maxPlaytime) * maxRadius, minRadius),
         d = {
           cluster: i,
@@ -177,7 +177,7 @@ class GamesListVisualBubbles extends Component {
   render() {
     return (
       <div>
-        {this.props.games.length > 0
+        {this.props.data.length > 0
           ? <div ref={element => this.element = element} />
           : <p>No games found</p>}
       </div>
