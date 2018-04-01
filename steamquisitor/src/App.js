@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './magnifying_glass_white.png';
-import { Button, Col, Form, FormControl, Glyphicon, InputGroup, Row, Well } from 'react-bootstrap';
+import { Button, Col, Form, FormControl, Glyphicon, InputGroup, Row, Tab, Well, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 import { RingLoader } from 'react-spinners';
 import './App.css';
 
@@ -148,28 +148,50 @@ class App extends Component {
         </div>
 
         <Well bsSize="small">
-          <div id="gamesVisual">
+          <Tab.Container id="tabs-with-dropdown" defaultActiveKey="1.3">
+            <Row className="clearfix">
+              <Col sm={12}>
+                <Nav bsStyle="tabs">
+                  <NavDropdown eventKey="1" title="Visual" id="nav-dropdown-within-tab">
+                    {/* <MenuItem eventKey="1.1">Bar Graph</MenuItem> */}
+                    <MenuItem eventKey="1.2">Bubbles</MenuItem>
+                    <MenuItem divider />
+                    <MenuItem eventKey="1.3">None</MenuItem>
+                  </NavDropdown>
+                </Nav>
+              </Col>
+              <Col sm={12}>
+                <Tab.Content animation>
+                  {/* <Tab.Pane eventKey="1.1"></Tab.Pane> */}
+                  <Tab.Pane eventKey="1.2">
+                    <div id="gamesVisual">
 
-            <div className="row">
-              <div className="col-md-offset-6">
-                <RingLoader color={'#337ab7'} loading={!this.state.gamesLoaded} />
-              </div>
-            </div>
+                      <div className="row">
+                        <div className="col-md-offset-6">
+                          <RingLoader color={'#337ab7'} loading={!this.state.gamesLoaded} />
+                        </div>
+                      </div>
 
-            {this.state.gamesLoaded && <GamesListVisual
-              games={this.state.games}
-              width={this.state.width * .9}
-              height={this.state.height * .9}
-            />}
-          </div>
+                      {this.state.gamesLoaded && <GamesListVisual
+                        games={this.state.games}
+                        width={this.state.width * .9}
+                        height={this.state.height * .9}
+                      />}
+                    </div>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="1.3"/>
+                </Tab.Content>
+              </Col>
+            </Row>
+          </Tab.Container>
         </Well>
 
         <Row className="show-grid">
           <Col md={6}>
-          {this.state.gamesLoaded && <GamesListRecent gameCount={this.state.gameCount} games={this.state.games} />}
+            {this.state.gamesLoaded && <GamesListRecent gameCount={this.state.gameCount} games={this.state.games} />}
           </Col>
           <Col md={6}>
-          {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
+            {this.state.friendsLoaded && <FriendsList friends={this.state.friends} />}
           </Col>
         </Row>
       </div>
