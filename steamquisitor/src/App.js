@@ -6,7 +6,8 @@ import './App.css';
 
 // import GamesList from './components/GamesList.js'
 import GamesListRecent from './components/GamesListRecent.js'
-import GamesListVisual from './components/GamesListVisual.js'
+import GamesListVisualBubbles from './components/GamesListVisualBubbles.js'
+import GamesListVisualBarGraph from './components/GamesListVisualBarGraph.js'
 import FriendsList from './components/FriendsList.js'
 
 const _ = require('lodash');
@@ -153,7 +154,7 @@ class App extends Component {
               <Col sm={12}>
                 <Nav bsStyle="tabs">
                   <NavDropdown eventKey="1" title="Visual" id="nav-dropdown-within-tab">
-                    {/* <MenuItem eventKey="1.1">Bar Graph</MenuItem> */}
+                    <MenuItem eventKey="1.1">Bar Graph</MenuItem>
                     <MenuItem eventKey="1.2">Bubbles</MenuItem>
                     <MenuItem divider />
                     <MenuItem eventKey="1.3">None</MenuItem>
@@ -162,24 +163,35 @@ class App extends Component {
               </Col>
               <Col sm={12}>
                 <Tab.Content animation>
-                  {/* <Tab.Pane eventKey="1.1"></Tab.Pane> */}
-                  <Tab.Pane eventKey="1.2">
-                    <div id="gamesVisual">
-
+                  <Tab.Pane eventKey="1.1">
+                    <div>
                       <div className="row">
                         <div className="col-md-offset-6">
                           <RingLoader color={'#337ab7'} loading={!this.state.gamesLoaded} />
                         </div>
                       </div>
 
-                      {this.state.gamesLoaded && <GamesListVisual
+                      {this.state.gamesLoaded && <GamesListVisualBarGraph
                         games={this.state.games}
                         width={this.state.width * .9}
-                        height={this.state.height * .9}
-                      />}
+                        height={this.state.height * .9} />}
                     </div>
                   </Tab.Pane>
-                  <Tab.Pane eventKey="1.3"/>
+                  <Tab.Pane eventKey="1.2">
+                    <div>
+                      <div className="row">
+                        <div className="col-md-offset-6">
+                          <RingLoader color={'#337ab7'} loading={!this.state.gamesLoaded} />
+                        </div>
+                      </div>
+
+                      {this.state.gamesLoaded && <GamesListVisualBubbles
+                        games={this.state.games}
+                        width={this.state.width * .9}
+                        height={this.state.height * .9} />}
+                    </div>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="1.3" />
                 </Tab.Content>
               </Col>
             </Row>

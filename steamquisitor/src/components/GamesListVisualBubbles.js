@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as d3 from "d3";
 
-class GamesListVisual extends Component {
+class GamesListVisualBubbles extends Component {
   // <props>
   // height: 0
   // width: 0
@@ -13,8 +13,8 @@ class GamesListVisual extends Component {
     this.state = {
       padding: 1.5,
       clusterPadding: 6,
-      maxRadius: (props.maxRadius || 100),
-      minRadius: (props.minRadius || 20),
+      maxRadius: (props.maxRadius || 80),
+      minRadius: (props.minRadius || 10),
     };
   }
 
@@ -23,7 +23,6 @@ class GamesListVisual extends Component {
   }
 
   renderVisual(element) {
-    // NOTE: Much of this rendering code is hacked together using examples online
     var width = this.props.width,
       height = this.props.height,
       padding = this.state.padding, // separation between same-color nodes
@@ -31,6 +30,7 @@ class GamesListVisual extends Component {
       maxRadius = this.state.maxRadius,
       minRadius = this.state.minRadius;
 
+    // NOTE: Much of this rendering code is hacked together using examples online.
     var itemCount = this.props.games.length; // number of distinct clusters
     // The largest node for each cluster.
     var clusters = new Array(itemCount);
@@ -185,4 +185,4 @@ class GamesListVisual extends Component {
   }
 
 }
-export default GamesListVisual;
+export default GamesListVisualBubbles;
