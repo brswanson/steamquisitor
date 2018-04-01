@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Badge, Image, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Image, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class GamesListRecent extends Component {
   // <props>

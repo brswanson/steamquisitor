@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Glyphicon, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 
 class FriendsList extends Component {
   // <props>
