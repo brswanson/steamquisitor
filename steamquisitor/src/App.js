@@ -89,6 +89,9 @@ class App extends Component {
         gamesLoaded: true,
       }))
       .catch(err => console.log(err));
+
+    // Note: Remove this if the below ever changes
+    Console.log("For devs: I'm linking some images via HTTP because Steam doesn't host them on HTTPS");
   }
 
   displayFriendList() {
