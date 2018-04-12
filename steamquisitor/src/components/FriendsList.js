@@ -15,7 +15,7 @@ class FriendsList extends Component {
         {this.props.friends.length > 0 &&
           <ListGroup>
             {this.props.friends.map((item, index) =>
-              <ListGroupItem key={index} href={`http://steamcommunity.com/profiles/` + item.steamid}>
+              <ListGroupItem key={index} href={`https://steamcommunity.com/profiles/` + item.steamid}>
                 <p><b>{item.steamid}</b>:
                 {item.friend_since > 0 ? ` Since ${this.convertTimestamp(item.friend_since)}` : ''}</p>
               </ListGroupItem>

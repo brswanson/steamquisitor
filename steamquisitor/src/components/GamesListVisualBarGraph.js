@@ -86,6 +86,7 @@ class GamesListVisualBarGraph extends Component {
       .attr("y", function (d) { return y(d.playtime_2weeks); })
       .attr("transform", "translate(0," + -10 + ")")
       .attr("xlink:href", function (d, i) {
+        // Note: Would use HTTPS, but Steam only provides HTTP access to these images
         return `http://media.steampowered.com/steamcommunity/public/images/apps/${d.appid}/${d.img_icon_url}.jpg`
       });
   }
