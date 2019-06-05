@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './magnifying_glass_white.png';
+import logo from './logo_small.png';
 import { Button, Col, Form, FormControl, Glyphicon, InputGroup, Row, Tab, Well, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 import { RingLoader } from 'react-spinners';
 import './App.css';
